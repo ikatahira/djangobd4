@@ -11,7 +11,7 @@ def cadastrar_pedido(request):
         form = PedidoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('lista_pedido')  # Supondo que haja uma view para listar os pedidos
+            return redirect('listar_pedido')  # Supondo que haja uma view para listar os pedidos
     else:
         form = PedidoForm()
     return render(request, 'cadastrar_pedido.html', {'form': form})
