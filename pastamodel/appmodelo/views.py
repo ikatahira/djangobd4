@@ -17,9 +17,6 @@ def cadastrar_pedido(request):
     return render(request, 'cadastrar_pedido.html', {'form': form})
 
 
-def pagina_inicial(request):
-    pedidos = Pedido.objects.all()
-    return render(request, 'pagina_inicial.html', {'pedidos': pedidos})
 
 def cadastrar_cliente(request):
     if request.method == 'POST':
@@ -56,3 +53,7 @@ from django.http import HttpResponse
 
 def pagina_inicial(request):
     return render(request, 'appmodelo/pagina_inicial.html')
+
+def listar_pedido(request):
+    pedidos = Pedido.objects.all()
+    return render(request, 'listar_pedido.html', {'pedidos': pedidos})
