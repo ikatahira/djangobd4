@@ -1,8 +1,25 @@
 # views.py
 
 from django.shortcuts import render, redirect
-from .forms import ClienteForm, ProdutoForm
-from .models import Cliente, Produto
+from .forms import ClienteForm, ProdutoForm, PedidoForm
+from .models import Cliente, Produto, Pedido
+
+from django.shortcuts import render, redirect
+
+def cadastrar_pedido(request):
+    if request.method == 'POST':
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_pedidos')  # Supondo que haja uma view para listar os pedidos
+    else:
+        form = PedidoForm()
+    return render(request, 'cadastrar_pedido.html', {'form': form})
+
+
+def pagina_inicial(request):
+    pedidos = Pedido.objects.all()
+    return render(request, 'pagina_inicial.html', {'pedidos': pedidos})
 
 def cadastrar_cliente(request):
     if request.method == 'POST':

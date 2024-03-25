@@ -1,6 +1,3 @@
-# appmodelo/models.py
-# models.py
-
 from django.db import models
 
 class Cliente(models.Model):
@@ -19,3 +16,11 @@ class Produto(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Pedido(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    produtos = models.ManyToManyField(Produto)
+    data_pedido = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Pedido #{self.pk}'

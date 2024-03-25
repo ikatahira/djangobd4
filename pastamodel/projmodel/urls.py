@@ -9,4 +9,6 @@ urlpatterns = [
     path('clientes/', views.listar_clientes, name='listar_clientes'),  # Rota para listar clientes
     path('produtos/cadastrar/', views.cadastrar_produto, name='cadastrar_produto'),  # Rota para cadastrar produto
     path('produtos/', views.listar_produtos, name='listar_produtos'),  # Rota para listar produtos
+    path('pedidos/cadastrar/', views.cadastrar_pedido, name='cadastrar_pedido'),
+
 ]
