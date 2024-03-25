@@ -10,5 +10,7 @@ urlpatterns = [
     path('produtos/cadastrar/', views.cadastrar_produto, name='cadastrar_produto'),  # Rota para cadastrar produto
     path('produtos/', views.listar_produtos, name='listar_produtos'),  # Rota para listar produtos
     path('pedidos/cadastrar/', views.cadastrar_pedido, name='cadastrar_pedido'),
+    path('pedidos', views.listar_pedido, name='listar_pedido'),
+
 
 ]

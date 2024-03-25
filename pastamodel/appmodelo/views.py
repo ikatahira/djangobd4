@@ -3,7 +3,7 @@
 from django.shortcuts import render, redirect
 from .forms import ClienteForm, ProdutoForm, PedidoForm
 from .models import Cliente, Produto, Pedido
-
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 def cadastrar_pedido(request):
@@ -11,7 +11,7 @@ def cadastrar_pedido(request):
         form = PedidoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('lista_pedidos')  # Supondo que haja uma view para listar os pedidos
+            return redirect('lista_pedido')  # Supondo que haja uma view para listar os pedidos
     else:
         form = PedidoForm()
     return render(request, 'cadastrar_pedido.html', {'form': form})
@@ -46,10 +46,6 @@ def cadastrar_produto(request):
 def listar_produtos(request):
     produtos = Produto.objects.all()
     return render(request, 'listar_produtos.html', {'produtos': produtos})
-
-from django.http import HttpResponse
-
-
 
 def pagina_inicial(request):
     return render(request, 'appmodelo/pagina_inicial.html')
