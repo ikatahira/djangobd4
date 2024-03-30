@@ -18,9 +18,19 @@ class Produto(models.Model):
         return self.nome
 
 class Pedido(models.Model):
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    produtos = models.ManyToManyField(Produto)
-    data_pedido = models.DateTimeField(auto_now_add=True)
+    cliente = models.ForeignKey('clientes.Cliente', on_delete=models.CASCADE)
+    produtos = models.ManyToManyField(Produto, through='ItemPedido')
+    data_pedido = models.DateField(auto_now_add=True)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f'Pedido #{self.pk}'
+        return f"Pedido #{self.id} - Cliente: {self.cliente.nome}"
+
+class ItemPedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantidade = models.PositiveIntegerField()
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Item do Pedido #{self.pedido.id} - Produto: {self.produto.nome}"
