@@ -48,7 +48,10 @@ def listar_produtos(request):
     return render(request, 'listar_produtos.html', {'produtos': produtos})
 
 def pagina_inicial(request):
-    return render(request, 'appmodelo/pagina_inicial.html')
+    pedidos = Pedido.objects.all()
+    # Passa os pedidos como contexto para o template
+    return render(request, 'pagina_inicial.html', {'pedidos': pedidos})
+
 
 def listar_pedido(request):
     pedidos = Pedido.objects.all()
