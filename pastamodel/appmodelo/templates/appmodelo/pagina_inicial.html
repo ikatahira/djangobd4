@@ -18,6 +18,10 @@
             <li class="list-group-item"><a href="{% url 'listar_produtos' %}" class="btn btn-primary">Lista de Produtos</a></li>
             <li class="list-group-item"><a href="{% url 'cadastrar_pedido' %}" class="btn btn-primary">Cadatrar Pedidos</a></li>
             <li class="list-group-item"><a href="{% url 'listar_pedido' %}" class="btn btn-primary">Lista Pedidos</a></li>
+            <!-- Adicione os links para as páginas de alterar e deletar -->
+            <li class="list-group-item"><a href="{% url 'alterar_pedido' pedido.id %}" class="btn btn-primary">Alterar Pedido</a></li>
+            <li class="list-group-item"><a href="{% url 'deletar_pedido' pedido.id %}" class="btn btn-primary">Deletar Pedido</a></li>
+      
             
         </ul>
     </div>
