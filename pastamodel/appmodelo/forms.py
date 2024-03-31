@@ -16,3 +16,7 @@ class PedidoForm(forms.ModelForm):
         model = Pedido
         fields = ['cliente', 'produtos']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Adiciona um widget personalizado para o campo cliente
+        self.fields['cliente'].widget = forms.Select(choices=Cliente.objects.values_list('id', 'nome'))

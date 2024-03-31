@@ -56,22 +56,22 @@ def pagina_inicial(request):
 def listar_pedido(request):
     pedidos = Pedido.objects.all()
     return render(request, 'listar_pedido.html', {'pedidos': pedidos})
-def alterar_pedido(request, pedido_id):
-    # Lógica para obter o pedido e renderizar o formulário de alteração
-    pedido = Pedido.objects.get(id=pedido_id)
-    if request.method == 'POST':
-        # Lógica para processar o formulário de alteração
-        # Redirecionar para a página de detalhes do pedido após a alteração
-        return redirect('detalhes_pedido', pedido_id=pedido.id)
-    else:
-        # Renderizar o formulário de alteração com os dados do pedido
-        return render(request, 'alterar_pedido.html', {'pedido': pedido})
+class PedidoForm(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ['cliente', 'produtos']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Adiciona um widget personalizado para o campo cliente
+        self.fields['cliente'].widget = forms.Select(choices=Cliente.objects.values_list('id', 'nome'))
+            
 def deletar_pedido(request, pedido_id):
     # Lógica para deletar o pedido
     pedido = Pedido.objects.get(id=pedido_id)
     pedido.delete()
     # Redirecionar para a página de listar pedidos após a exclusão
-    return redirect('listar_pedidos')
+    return redirect('listar_pedido')  # Alterado de 'listar_pedidos' para 'listar_pedido'
 
 # Views para alterar e deletar cliente e produto
 def alterar_cliente(request, cliente_id):
