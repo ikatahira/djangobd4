@@ -56,15 +56,7 @@ def pagina_inicial(request):
 def listar_pedido(request):
     pedidos = Pedido.objects.all()
     return render(request, 'listar_pedido.html', {'pedidos': pedidos})
-class PedidoForm(forms.ModelForm):
-    class Meta:
-        model = Pedido
-        fields = ['cliente', 'produtos']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Adiciona um widget personalizado para o campo cliente
-        self.fields['cliente'].widget = forms.Select(choices=Cliente.objects.values_list('id', 'nome'))
             
 def deletar_pedido(request, pedido_id):
     # Lógica para deletar o pedido

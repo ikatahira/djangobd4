@@ -22,7 +22,6 @@
              {% for pedido in pedidos %}
              <li class="list-group-item">
                  Pedido #{{ pedido.id }} - Cliente: {{ pedido.cliente.nome }}
-                 <a href="{% url 'alterar_pedido' pedido.id %}" class="btn btn-primary">Alterar Pedido</a>
                  <a href="{% url 'deletar_pedido' pedido.id %}" class="btn btn-primary">Deletar Pedido</a>
              </li>
              {% endfor %}
